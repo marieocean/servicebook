@@ -49,16 +49,15 @@ var application = new Vue({
        {
         axios.post('src/action.php', {
          action:'update',
-         firstName : application.first_name,
-         lastName : application.last_name,
-         hiddenId : application.hiddenId
+         client:application.client, 
+         date_rdv:application.date_rdv,
+         duration:application.duration,
+         other_location:application.other_location,
+         id : application.hiddenId
         }).then(function(response){
          application.myModel = false;
          application.fetchAllData();
-         application.first_name = '';
-         application.last_name = '';
-         application.hiddenId = '';
-         application.fetch10Data();
+         application.clearModal();
         });
        }
       }
@@ -72,12 +71,14 @@ var application = new Vue({
        action:'fetchSingle',
        id:id
       }).then(function(response){
-       application.first_name = response.data.first_name;
-       application.last_name = response.data.last_name;
+       application.client = response.data.client;
+       application.date_rdv = response.data.date_rdv;
+       application.duration = response.data.duration;
+       application.other_location = response.data.other_location;
        application.hiddenId = response.data.id;
        application.myModel = true;
        application.actionButton = 'Update';
-       application.dynamicTitle = 'Edit Data';
+       application.dynamicTitle = 'Edit the appointment';
       })
      },
      deleteData:function(id){
@@ -88,7 +89,7 @@ var application = new Vue({
         id:id
        }).then(function(response){
         alert(response.data.message);
-        application.fetch10Data();
+        application.fetchAllData();
        });
       }
      }

@@ -9,6 +9,12 @@
             echo $booking->getAll();break;
         case "insert":
             echo $booking->insert($received_data);break;
+        case "update":
+            echo $booking->update($received_data);break;
+        case "fetchSingle":
+            echo $booking->fetchSingle($received_data);break;
+        case "delete":
+            echo $booking->delete($received_data);break;
         default: die();
 
     }
