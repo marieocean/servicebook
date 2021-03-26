@@ -7,7 +7,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="src//css/style.css">
+  <link rel="stylesheet" href="src/css/style.css">
  </head>
  <body>
   <div class="container" id="vue-container">
@@ -65,7 +65,7 @@
           </div>
           <div class="form-group">
            <label>Enter Date</label>
-           <input type="text" class="form-control" v-model="date_rdv" />
+           <vuejs-datepicker v-model="date_rdv"   :format="customFormatter"></vuejs-datepicker>
           </div>
           <div class="form-group">
            <label>Enter Duration</label>
@@ -91,5 +91,5 @@
  </body>
 </html>
 
-
+<script src="https://unpkg.com/vuejs-datepicker"></script>
 <script src="src/js/vue.js"></script>

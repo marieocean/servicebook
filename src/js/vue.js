@@ -1,4 +1,3 @@
-
 var application = new Vue({
     el:'#vue-container',
     data:{
@@ -6,6 +5,10 @@ var application = new Vue({
      myModel:false,
      actionButton:'Insert',
      dynamicTitle:'Add Data',
+     date_rdv :new Date()
+    },
+    components: {
+      vuejsDatepicker
     },
     methods:{
      fetchAllData:function(){
@@ -15,9 +18,15 @@ var application = new Vue({
        application.allData = response.data;
       });
      },
+     tomysql(date) {var date;
+      date = new Date();
+      date = date.getUTCFullYear() + '-' +
+          ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
+          ('00' + date.getUTCDate()).slice(-2) ;
+          return date;
+    },
      clearModal:function(){
       application.client = '';
-      application.date_rdv = '';
       application.duration = '';
       application.location = '';
      },
@@ -35,7 +44,7 @@ var application = new Vue({
         axios.post('src/action.php', {
          action:'insert',
          client:application.client, 
-         date_rdv:application.date_rdv,
+         date_rdv:application.tomysql(application.date_rdv),
          duration:application.duration,
          other_location:application.other_location,
         }).then(function(response){
@@ -50,7 +59,7 @@ var application = new Vue({
         axios.post('src/action.php', {
          action:'update',
          client:application.client, 
-         date_rdv:application.date_rdv,
+         date_rdv:application.tomysql(application.date_rdv),
          duration:application.duration,
          other_location:application.other_location,
          id : application.hiddenId
@@ -96,6 +105,6 @@ var application = new Vue({
     },
     
     mounted:function(){
-     this.fetchAllData();
+           this.fetchAllData();
     }
    });
