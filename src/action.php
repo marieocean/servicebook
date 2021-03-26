@@ -14,7 +14,7 @@
     $logger->pushHandler(new StreamHandler($logfile, Logger::ERROR));
     
     try{
-        $connect = new PDO("mysql:host=mysql-server;dbname=servicebooking", "root", "sedcret");
+        $connect = new PDO("mysql:host=mysql-server;dbname=servicebooking", "root", "secret");
     }
     catch(Exception $e){
         $logger->error('Impossible to connect to the database');
