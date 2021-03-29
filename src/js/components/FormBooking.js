@@ -13,11 +13,15 @@ Vue.component('form-booking', {
       dynamicTitle:'Add Data',
     }
   },
+  components: {
+    vuejsDatepicker
+  },
   methods: {
     hideModel: function(){
       return this.showModel = false;
     }
   },
+  //TODO: make changes so that input can be opened two times, something to do with the binding of the props
 
   template:   `<div v-if="myModel">
   <transition name="model">
@@ -36,7 +40,7 @@ Vue.component('form-booking', {
         </div>
         <div class="form-group">
          <label>Enter Date</label>
-         
+         <vuejs-datepicker v-model="date_rdv"  ></vuejs-datepicker>
         </div>
         <div class="form-group">
          <label>Enter Duration</label>
