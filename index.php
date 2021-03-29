@@ -48,48 +48,11 @@
      </div>
     </div>
     </div>
-   <div v-if="myModel">
-    <transition name="model">
-     <div class="modal-mask">
-      <div class="modal-wrapper">
-       <div class="modal-dialog">
-        <div class="modal-content">
-         <div class="modal-header">
-          <button type="button" class="close" @click="myModel=false"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">{{ dynamicTitle }}</h4>
-         </div>
-         <div class="modal-body">
-          <div class="form-group">
-           <label>Enter Client Name</label>
-           <input type="text" class="form-control" v-model="client" />
-          </div>
-          <div class="form-group">
-           <label>Enter Date</label>
-           <vuejs-datepicker v-model="date_rdv"   :format="customFormatter"></vuejs-datepicker>
-          </div>
-          <div class="form-group">
-           <label>Enter Duration</label>
-           <input type="text" class="form-control" v-model="duration" />
-          </div>
-          <div class="form-group">
-           <label>Enter Location</label>
-           <input type="text" class="form-control" v-model="other_location" />
-          </div>
-          <br />
-          <div align="center">
-           <input type="hidden" v-model="hiddenId" />
-           <input type="button" class="btn btn-success btn-xs" v-model="actionButton" @click="submitData" />
-          </div>
-         </div>
-        </div>
-       </div>
-       </div>
-     </div>
-    </transition>
-   </div>
+  <form-booking v-bind:my-model="myModel"></form-booking>
   </div>
  </body>
 </html>
 
 <script src="https://unpkg.com/vuejs-datepicker"></script>
+<script src="src/js/components/FormBooking.js"></script>
 <script src="src/js/vue.js"></script>
