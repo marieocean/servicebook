@@ -19,7 +19,57 @@ Vue.component('form-booking', {
   methods: {
     hideModel: function(){
       return this.showModel = false;
-    }
+    },
+    tomysql(date) {var date;
+     date = new Date();
+     date = date.getUTCFullYear() + '-' +
+         ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
+         ('00' + date.getUTCDate()).slice(-2) ;
+         return date;
+   },
+   clearModal:function(){
+    this.client = '';
+    this.duration = '';
+    this.location = '';
+   },
+    submitData:function(){
+     if(this.client != '' && this.date_rdv != '')
+     {
+      if(application.actionButton == 'Insert')
+      {
+       axios.post('src/action.php', {
+        action:'insert',
+        client:this.client, 
+        date_rdv:this.tomysql(this.date_rdv),
+        duration:this.duration,
+        other_location:this.other_location,
+       }).then(function(response){
+        this.myModel = false;         
+       }).then(function(response){
+         this.$parent.fetchAllData();
+       });
+      }
+      if(application.actionButton == 'Update')
+      {
+       axios.post('src/action.php', {
+        action:'update',
+        client:application.client, 
+        date_rdv:application.tomysql(application.date_rdv),
+        duration:application.duration,
+        other_location:application.other_location,
+        id : application.hiddenId
+       }).then(function(response){
+        application.myModel = false;
+        application.fetchAllData();
+        application.clearModal();
+       });
+      }
+     }
+     else
+     {
+      alert("Fill All Field");
+     }
+    },
   },
   //TODO: make changes so that input can be opened two times, something to do with the binding of the props
 
@@ -53,7 +103,7 @@ Vue.component('form-booking', {
         <br />
         <div align="center">
          <input type="hidden" v-model="hiddenId" />
-         <input type="button" class="btn btn-success btn-xs" v-model="actionButton" />
+         <input type="button" class="btn btn-success btn-xs" v-on:click="submitData" v-model="actionButton" />
         </div>
        </div>
       </div>
