@@ -7,9 +7,6 @@ var application = new Vue({
      dynamicTitle:'Add Data',
      date_rdv :new Date()
     },
-    components: {
-      vuejsDatepicker
-    },
     methods:{
      fetchAllData:function(){
       axios.post('src/action.php', {
